@@ -1,6 +1,6 @@
 /**
  * Extra Credit
- * CSS: put real dots on the dice. 
+ X CSS: put real dots on the dice. 
  X Track the number of rolls 
  * Track the time it took to win
  * Sava your best time to localStorage
@@ -36,7 +36,7 @@ export default function App() {
 
   function generateDice(){
     return { 
-      value: Math.ceil(Math.random() * 5),
+      value: Math.ceil(Math.random() * 6),
       isHeld: false,
       id: nanoid()
     }
@@ -102,14 +102,15 @@ export default function App() {
   
 
     return (
-        <main>
-          {tenzies && <Confetti />}
-          <h1 className="title">Tenzies</h1>
-          <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-          <div className="dies-container">
-            {diecesElements}
-          </div>
-          <button className="roll-dice" onClick={rollDice}>{rollButton()}</button>
-        </main>
+
+          <main>
+            {tenzies && <Confetti />}
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+            <div className="dies-container">
+              {diecesElements}
+            </div>
+            <button className="roll-dice" onClick={rollDice}>{rollButton()}</button>
+          </main>
     )
 }
