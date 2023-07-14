@@ -1,3 +1,12 @@
+/**
+ * Extra Credit
+ * CSS: put real dots on the dice. 
+ X Track the number of rolls 
+ * Track the time it took to win
+ * Sava your best time to localStorage
+ */
+
+
 
 import React from "react"
 import Die from "./Die.js"
@@ -8,6 +17,13 @@ export default function App() {
 
   const [dices, setDices]  = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const [countRolls, setCountRolls] = React.useState(0);
+  
+  
+  function counter(){
+    setCountRolls(prevCountRolls => prevCountRolls+=1)
+  }
+  
 
   React.useEffect(()=>{
     const allHeld = dices.every(die => die.isHeld)
@@ -15,13 +31,12 @@ export default function App() {
     const allSameValue = dices.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
         setTenzies(true)
-        console.log("You won!")
     }
   }, dices);
 
   function generateDice(){
     return { 
-      value: Math.ceil(Math.random() * 6),
+      value: Math.ceil(Math.random() * 5),
       isHeld: false,
       id: nanoid()
     }
@@ -38,6 +53,7 @@ export default function App() {
 
   function rollDice() {
     if(!tenzies){
+      counter(); 
       setDices(prevDice => {
           let newDice = []; 
           for(let i=0; i<prevDice.length; i++){
@@ -52,7 +68,8 @@ export default function App() {
       })
     }else{
       setTenzies(false);
-      setDices(allNewDice()); 
+      setDices(allNewDice());
+      setCountRolls(0);  
     }  
 }
 
@@ -71,8 +88,18 @@ export default function App() {
     holdDice = {() => holdDice(dice.id)}
   />)
 
-  const rollButton = tenzies? "New Game": "Roll" 
-
+  
+   
+  function rollButton(){
+    if(!tenzies && countRolls === 0){
+      return "Roll"
+    }else if(!tenzies && countRolls > 0){
+      return "Roll: "+countRolls
+    }else{
+      return "New Game"
+    }
+  }
+  
 
     return (
         <main>
@@ -82,7 +109,7 @@ export default function App() {
           <div className="dies-container">
             {diecesElements}
           </div>
-          <button className="roll-dice" onClick={rollDice}>{rollButton}</button>
+          <button className="roll-dice" onClick={rollDice}>{rollButton()}</button>
         </main>
     )
 }
