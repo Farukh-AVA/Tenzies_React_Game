@@ -66,6 +66,9 @@ main{
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   cursor: pointer;
+  animation: dotAnimationDice 0.5s ease-in-out 1s;
+  animation-delay: 0s;
+  
 }
 
 .dot {
@@ -74,6 +77,10 @@ main{
   height: 11px;
   background-color: black;
   border-radius: 50%;
+  animation: dotAnimationDots 0.5s ease-in-out 1s;
+  animation-delay: 0.1s;
+  
+  
 }
 
 .dot-center {
@@ -161,6 +168,32 @@ main{
   bottom: 1.8px;
   right: 1.8px;
 }
+
+@keyframes dotAnimationDots {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+
+@keyframes dotAnimationDice {
+  0% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
 @media only screen and (min-width: 350px) {
   main {
       max-width: 400px;

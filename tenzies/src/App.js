@@ -34,6 +34,7 @@ export default function App() {
     }
   }, dices);
 
+
   function generateDice(){
     return { 
       value: Math.ceil(Math.random() * 6),
