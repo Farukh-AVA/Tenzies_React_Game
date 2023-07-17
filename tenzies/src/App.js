@@ -1,6 +1,7 @@
 /**
  * Extra Credit
  X CSS: put real dots on the dice. 
+ X CSS: added animation 
  X Track the number of rolls 
  * Track the time it took to win
  * Sava your best time to localStorage
@@ -18,23 +19,49 @@ export default function App() {
   const [dices, setDices]  = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
   const [countRolls, setCountRolls] = React.useState(0);
-  
-  
-  function counter(){
-    setCountRolls(prevCountRolls => prevCountRolls+=1)
-  }
-  
+  const [time, setTime] = React.useState(0);
+  const [isTimeRunning, setIsTimeRunning] = React.useState(false);
+
+  React.useEffect(() => {
+    let intervalId;
+
+    if (isTimeRunning) {
+      intervalId = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalId);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [isTimeRunning]);
 
   React.useEffect(()=>{
     const allHeld = dices.every(die => die.isHeld)
     const firstValue = dices[0].value
     const allSameValue = dices.every(die => die.value === firstValue)
     if (allHeld && allSameValue) {
-        setTenzies(true)
+        setTenzies(true);
+        setIsTimeRunning(false); 
     }
   }, dices);
 
+  function formatTime(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${padTime(minutes)}:${padTime(seconds)}`;
+  }
+  function padTime(time) {
+    return time.toString().padStart(2, '0');
+  }
 
+  console.log(formatTime(time))
+  
+  function counter(){
+    setCountRolls(prevCountRolls => prevCountRolls+=1)
+  }
   function generateDice(){
     return { 
       value: Math.ceil(Math.random() * 6),
@@ -44,7 +71,6 @@ export default function App() {
   }
   
   function allNewDice(){
-    
     let dice = [];
     for(let i=0; i<10; i++){
       dice.push(generateDice())
@@ -54,7 +80,8 @@ export default function App() {
 
   function rollDice() {
     if(!tenzies){
-      counter(); 
+      counter();
+      setIsTimeRunning(true) 
       setDices(prevDice => {
           let newDice = []; 
           for(let i=0; i<prevDice.length; i++){
@@ -70,11 +97,13 @@ export default function App() {
     }else{
       setTenzies(false);
       setDices(allNewDice());
-      setCountRolls(0);  
+      setCountRolls(0); 
+      setIsTimeRunning(false);  
     }  
 }
 
   function holdDice(id){
+    setIsTimeRunning(true); 
     setDices(oldDice => oldDice.map(die => {
       return die.id === id ? 
           {...die, isHeld: !die.isHeld} :
