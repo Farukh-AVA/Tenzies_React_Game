@@ -5,7 +5,7 @@ import Dots from "./Dots.js"
 export default function Die(props){
 
     const styles = {
-        backgroundColor: props.dieObj.isHeld ? "#59E391": "white"
+        backgroundColor: props.dieObj.isHeld ? "#4ea5db": "white"
     }
  
     return (

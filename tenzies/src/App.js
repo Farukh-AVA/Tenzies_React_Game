@@ -3,8 +3,10 @@
  X CSS: put real dots on the dice. 
  X CSS: added animation 
  X Track the number of rolls 
- * Track the time it took to win
- * Sava your best time to localStorage
+ X Track the time it took to win
+ X Sava your best time to localStorage
+ X Track the number of roll
+ X Sava your best number of roll to localStorage
  */
 
 
@@ -21,7 +23,8 @@ export default function App() {
   const [countRolls, setCountRolls] = React.useState(0);
   const [time, setTime] = React.useState(0);
   const [isTimeRunning, setIsTimeRunning] = React.useState(false);
-
+  const [bestTime, setBestTime] = React.useState(JSON.parse(localStorage.getItem("bestTime")) || Number.MAX_VALUE); 
+  const [bestRolls, setBestRolls] = React.useState(JSON.parse(localStorage.getItem("bestRolls")) || Number.MAX_VALUE);
   React.useEffect(() => {
     let intervalId;
 
@@ -45,8 +48,21 @@ export default function App() {
     if (allHeld && allSameValue) {
         setTenzies(true);
         setIsTimeRunning(false); 
+        setBestTime(prevBestTime =>{
+          return prevBestTime < time? prevBestTime: time
+        })
+        setBestRolls(prevBestRolls =>{
+          return prevBestRolls < countRolls? prevBestRolls: countRolls
+        })
     }
   }, dices);
+
+  React.useEffect(()=>{
+    localStorage.setItem("bestTime", JSON.stringify(bestTime))
+    localStorage.setItem("bestRolls", JSON.stringify(bestRolls))
+  }, [tenzies])
+
+  console.log(bestTime); 
 
   function formatTime(time) {
     const minutes = Math.floor(time / 60);
@@ -57,7 +73,6 @@ export default function App() {
     return time.toString().padStart(2, '0');
   }
 
-  console.log(formatTime(time))
   
   function counter(){
     setCountRolls(prevCountRolls => prevCountRolls+=1)
@@ -118,7 +133,8 @@ export default function App() {
     holdDice = {() => holdDice(dice.id)}
   />)
 
-  
+  let showTimer = formatTime(time);
+  let showBestTime = formatTime(bestTime);
    
   function rollButton(){
     if(!tenzies && countRolls === 0){
@@ -136,11 +152,18 @@ export default function App() {
           <main>
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
+            {!tenzies && showTimer}
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dies-container">
               {diecesElements}
             </div>
             <button className="roll-dice" onClick={rollDice}>{rollButton()}</button>
+            {tenzies && (
+              <div >
+                <div className="score">🫵⏲️{showTimer} 🎲{countRolls}🫵</div> 
+                 <div>🥇⏲️{showBestTime} 🎲{bestRolls}🥇 </div>
+              </div>
+            )}
           </main>
     )
 }

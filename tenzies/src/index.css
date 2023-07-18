@@ -36,7 +36,7 @@ main{
   width: 100px;
   border: none;
   border-radius: 6px;
-  background-color: #5035FF;
+  background-color: #264e68;
   color: white;
   font-size: 1rem;
   font-family: 'Karla', sans-serif;
@@ -167,6 +167,12 @@ main{
 .dot::after {
   bottom: 1.8px;
   right: 1.8px;
+}
+.score{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes dotAnimationDots {
