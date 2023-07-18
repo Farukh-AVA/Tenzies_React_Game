@@ -1,4 +1,4 @@
-# Tenzies_React_Game
+# Tenzies React Game
 Tenzies is a fun and addictive dice game where players try to roll and match dice combinations to score points. I created this game based on a tutorial from [Scrimba](https://scrimba.com/dashboard#overview). However, I added functionality such as:
  * CSS: implemented real dots on the dice.
  * CSS: implemented rotating animation for dice 
