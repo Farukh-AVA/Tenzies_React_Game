@@ -1,6 +1,14 @@
 # Tenzies_React_Game
-Tenzies is a fun and addictive dice game where players try to roll and match dice combinations to score points.
-<img src="https://github.com/Farukh-AVA/tenzies-react-game/blob/main/TenziesGif.gif"  width=500><br>
+Tenzies is a fun and addictive dice game where players try to roll and match dice combinations to score points. I created this game based on a tutorial from [Scrimba](https://scrimba.com/dashboard#overview). However, I added functionality such as:
+ * CSS: implemented real dots on the dice.
+ * CSS: implemented rotating animation for dice 
+ * Implemented a win time 
+ * Storing the best time to localStorage
+ * Number of rolls count
+ * Storing the least number of rolls to localStorage
+<p align="center">
+   <img src="https://github.com/Farukh-AVA/tenzies-react-game/blob/main/TenziesGif.gif"  width=500><br>
+</p>
 
 ## Getting Started
 
