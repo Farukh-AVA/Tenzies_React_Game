@@ -149,7 +149,7 @@ export default function App() {
 
     return (
 
-          <main>
+          <main className="main"> 
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
             {!tenzies && showTimer}
