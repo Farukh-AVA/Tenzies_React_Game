@@ -152,16 +152,16 @@ export default function App() {
           <main className="main"> 
             {tenzies && <Confetti />}
             <h1 className="title">Tenzies</h1>
-            {!tenzies && showTimer}
+            {!tenzies && (<div className="timer">{showTimer}</div>)}
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="dies-container">
               {diecesElements}
             </div>
-            <button className="roll-dice" onClick={rollDice}>{rollButton()}</button>
+            <button className="roll-dice" onClick={rollDice}><div className="rollText">{rollButton()}</div></button>
             {tenzies && (
               <div >
                 <div className="score">🫵⏲️{showTimer} 🎲{countRolls}🫵</div> 
-                 <div>🥇⏲️{showBestTime} 🎲{bestRolls}🥇 </div>
+                 <div className="highestScore">🥇⏲️{showBestTime} 🎲{bestRolls}🥇 </div>
               </div>
             )}
           </main>
