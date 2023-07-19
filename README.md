@@ -6,7 +6,7 @@ Tenzies is a fun and addictive dice game where players try to roll and match dic
  * Storing the best time to localStorage
  * Number of rolls count
  * Storing the least number of rolls to localStorage
- ####[Play](https://imaginative-jelly-7bf3f3.netlify.app/)  
+</br>[Play](https://imaginative-jelly-7bf3f3.netlify.app/)  
 <p align="center">
    <img src="https://github.com/Farukh-AVA/tenzies-react-game/blob/main/TenziesGif.gif"  width=500><br>
 </p>
